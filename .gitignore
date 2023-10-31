@@ -127,6 +127,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+datathon_normandie_env/
 
 # Spyder project settings
 .spyderproject
