@@ -1,7 +1,7 @@
 .PHONY: carte
 
 carte: always
-	python main.py
+	python3 main.py
 
 always:
 	@true
