@@ -1,4 +1,12 @@
-flask
+folium
 pandas
 geopandas
-folium
+flask
+Flask-WTF
+
+python-dotenv
+
+Flask-Caching
+werkzeug==2.1.2
+
+gunicorn
