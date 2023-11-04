@@ -12,12 +12,13 @@ from prioreno.data_processing.get_data import get_data
 pd.set_option('display.max_column', None)
 
 gdf_data = get_data()
-print(gdf_data.info())
 
 @cache.cached(timeout=50)
 def index():
+    sum_logement = gdf_data['nb_log'].sum()
     return render_template(
         'index.html',
+        data = gdf_data
     )
 
 def login():
