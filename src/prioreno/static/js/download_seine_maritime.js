@@ -43,7 +43,7 @@ downloadPNG_confiance_seine_maritime.addEventListener('click', function() {
 });
 
 
-function convertTableToCSV() {
+function convertTableToCSV_seine_maritime() {
     var table = document.getElementById("dataTableseine_maritime");
     var rows = table.rows;
     var csv = [];
@@ -63,7 +63,7 @@ function convertTableToCSV() {
 }
 
 document.getElementById("downloadCSV_ville_seine_maritime").addEventListener("click", function() {
-    var csvContent = convertTableToCSV();
+    var csvContent = convertTableToCSV_seine_maritime();
     var blob = new Blob([csvContent], { type: "text/csv" });
     var url = URL.createObjectURL(blob);
 

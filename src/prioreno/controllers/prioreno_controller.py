@@ -7,7 +7,7 @@ import folium
 from flask import render_template, request, redirect, url_for, jsonify
 from prioreno.conf.conf_file import config
 from prioreno.controllers.cache_settings import cache
-from prioreno.data_processing.get_data import get_data, get_data_preca_table_data
+from prioreno.data_processing.get_data import get_data, get_data_preca_table_data, get_libelle_departement, get_taux_preca_par_departement
 
 pd.set_option('display.max_column', None)
 
@@ -15,9 +15,13 @@ gdf_data = get_data()
 
 @cache.cached(timeout=50)
 def index():
+    data = get_libelle_departement(gdf_data)
+    data_preca = get_taux_preca_par_departement(data)
     return render_template(
         'index.html',
-        data = gdf_data
+        data = data,
+        data_preca = data_preca,
+        data_commune_preca = get_data_preca_table_data(data)
     )
 
 @cache.cached(timeout=50)

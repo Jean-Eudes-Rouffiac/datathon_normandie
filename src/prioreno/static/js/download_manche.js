@@ -43,7 +43,7 @@ downloadPNG_confiance_manche.addEventListener('click', function() {
 });
 
 
-function convertTableToCSV() {
+function convertTableToCSV_manche() {
     var table = document.getElementById("dataTablemanche");
     var rows = table.rows;
     var csv = [];
@@ -63,7 +63,7 @@ function convertTableToCSV() {
 }
 
 document.getElementById("downloadCSV_ville_manche").addEventListener("click", function() {
-    var csvContent = convertTableToCSV();
+    var csvContent = convertTableToCSV_manche();
     var blob = new Blob([csvContent], { type: "text/csv" });
     var url = URL.createObjectURL(blob);
 

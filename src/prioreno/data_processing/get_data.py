@@ -1,6 +1,6 @@
 import os
 
-import requests
+import numpy as np
 import pandas as pd
 import geopandas as gpd
 
@@ -40,4 +40,25 @@ def get_data_preca_table_data(df: pd.DataFrame) -> pd.DataFrame:
 
     return data_preca
 
+def get_libelle_departement(df: pd.DataFrame) -> pd.DataFrame:
+    departement_mapping = {
+    14: 'Calvados',
+    27: 'Eure',
+    50: 'Manche',
+    61: 'Orne',
+    76: 'Seine-Maritime',
+    }
+    df['libelle_departement'] = df['code_departement_insee'].map(departement_mapping)
+    return df
+
+def get_taux_preca_par_departement(df: pd.DataFrame) -> pd.DataFrame:
+    total_logement_departement = df[["libelle_departement", "nb_log"]].groupby(["libelle_departement"]).sum("nb_log").reset_index()
+    total_preca_departement = df[["libelle_departement", "precarite_energetique", "nb_log"]].groupby(["libelle_departement", "precarite_energetique"]).sum("nb_log").reset_index().rename(columns = {'nb_log' : 'nb_log_preca'})
+
+    departement_preca = total_preca_departement.merge(total_logement_departement, on='libelle_departement', how = 'left')
+    departement_preca['taux_preca'] = np.where(departement_preca['nb_log'] != 0, np.round((departement_preca['nb_log_preca'] / departement_preca['nb_log'])*100, 0), np.nan)
+    departement_preca['taux_preca'] = departement_preca['taux_preca'].astype(int)
+    departement_preca = departement_preca.drop(columns=['nb_log_preca', 'nb_log'])
+
+    return departement_preca
     

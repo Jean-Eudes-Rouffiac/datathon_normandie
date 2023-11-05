@@ -43,7 +43,7 @@ downloadPNG_confiance_orne.addEventListener('click', function() {
 });
 
 
-function convertTableToCSV() {
+function convertTableToCSV_orne() {
     var table = document.getElementById("dataTableorne");
     var rows = table.rows;
     var csv = [];
@@ -63,17 +63,17 @@ function convertTableToCSV() {
 }
 
 document.getElementById("downloadCSV_ville_orne").addEventListener("click", function() {
-    var csvContent = convertTableToCSV();
-    var blob = new Blob([csvContent], { type: "text/csv" });
-    var url = URL.createObjectURL(blob);
+    var csvContent_orne = convertTableToCSV_orne();
+    var blob_orne = new Blob([csvContent_orne], { type: "text/csv" });
+    var url_orne = URL.createObjectURL(blob_orne);
 
-    var a = document.createElement("a");
-    a.href = url;
-    a.download = "top_20_villes_preca_orne.csv";
-    a.style.display = "none";
+    var a_orne = document.createElement("a");
+    a_orne.href = url_orne;
+    a_orne.download = "top_20_villes_preca_orne.csv";
+    a_orne.style.display = "none";
 
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    document.body.appendChild(a_orne);
+    a_orne.click();
+    document.body.removeChild(a_orne);
     URL.revokeObjectURL(url);
 });

@@ -43,7 +43,7 @@ downloadPNG_confiance_calvados.addEventListener('click', function() {
 });
 
 
-function convertTableToCSV() {
+function convertTableToCSV_calvados() {
     var table = document.getElementById("dataTableCalvados");
     var rows = table.rows;
     var csv = [];
@@ -63,7 +63,7 @@ function convertTableToCSV() {
 }
 
 document.getElementById("downloadCSV_ville_calvados").addEventListener("click", function() {
-    var csvContent = convertTableToCSV();
+    var csvContent = convertTableToCSV_calvados();
     var blob = new Blob([csvContent], { type: "text/csv" });
     var url = URL.createObjectURL(blob);
 

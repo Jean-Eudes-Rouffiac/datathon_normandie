@@ -43,7 +43,7 @@ downloadPNG_confiance_eure.addEventListener('click', function() {
 });
 
 
-function convertTableToCSV() {
+function convertTableToCSV_eure() {
     var table = document.getElementById("dataTableeure");
     var rows = table.rows;
     var csv = [];
@@ -63,7 +63,7 @@ function convertTableToCSV() {
 }
 
 document.getElementById("downloadCSV_ville_eure").addEventListener("click", function() {
-    var csvContent = convertTableToCSV();
+    var csvContent = convertTableToCSV_eure();
     var blob = new Blob([csvContent], { type: "text/csv" });
     var url = URL.createObjectURL(blob);
 
