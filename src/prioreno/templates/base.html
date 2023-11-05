@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="static/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="static/css/perso.css" rel="stylesheet">
 
 </head>
 
@@ -31,7 +32,7 @@
         <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
             <div class="mx-auto">
                 <a class="navbar-brand" href="{{ url_for('prioreno.index') }}">
-                    <img src="static/img/prioreno.png" alt="Logo" width="150" height="150"> <!-- Agrandir l'image -->
+                    <img src="static/img/prioreno.png" alt="Logo" class="img-fluid" style="max-width: 100%; height: auto;">
                 </a>
             </div>
             
@@ -39,10 +40,10 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('prioreno.index') }}">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Normandie</span></a>
             </li>
 
             <!-- Divider -->
@@ -50,42 +51,39 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Options
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Départements</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                        <a class="collapse-item" href="{{ url_for('prioreno.calvados') }}">Calvados (14)</a>
+                        <a class="collapse-item" href="{{ url_for('prioreno.eure') }}">Eure (27)</a>
+                        <a class="collapse-item" href="{{ url_for('prioreno.manche') }}">Manche (50)</a>
+                        <a class="collapse-item" href="{{ url_for('prioreno.orne') }}">Orne (61)</a>
+                        <a class="collapse-item" href="{{ url_for('prioreno.seine_maritime') }}">Seine-Maritime (76)</a>
                     </div>
                 </div>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
+            <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Table</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-map-o"></i>
+                    <span>Carte</span></a>
             </li>
 
             <!-- Divider -->
@@ -175,11 +173,19 @@
 
         <!-- Page level plugins -->
         <script src="static/vendor/chart.js/Chart.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
 
         <!-- Page level custom scripts -->
-        <script src="static/js/demo/chart-area-demo.js"></script>
-        <script src="static/js/demo/chart-pie-demo.js"></script>
-
+        <script src="static/js/charts_calvados.js"></script>
+        <script src="static/js/charts_eure.js"></script>
+        <script src="static/js/charts_manche.js"></script>
+        <script src="static/js/charts_orne.js"></script>
+        <script src="static/js/charts_seine_maritime.js"></script>
+        <script src="static/js/download_calvados.js"></script>
+        <script src="static/js/download_eure.js"></script>
+        <script src="static/js/download_manche.js"></script>
+        <script src="static/js/download_orne.js"></script>
+        <script src="static/js/download_seine_maritime.js"></script>
     </body>
 
     </html>

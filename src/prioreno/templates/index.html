@@ -6,8 +6,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <h1 class="h3 mb-0 text-dark text-center">Normandie</h1>
                     </div>
 
                     <!-- Content Row -->
@@ -33,13 +32,13 @@
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card border-left-danger shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Nombre de foyer en précarité énergétique</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                Nombre de foyers en précarité énergétique</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ "{:,.0f}".format(data[data['precarite_energetique']==5]['nb_log'].sum()) }}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
