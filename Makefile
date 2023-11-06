@@ -42,7 +42,7 @@ run_flask:  ## run flask app locally
 	@$(CONDA_ACTIVATE); python $(PROJECT_ROOT)/wsgi.py
 
 run_gunicorn:  ## run flask app locally
-	@$(CONDA_ACTIVATE); gunicorn -w 4 wsgi:gunicorn_app
+	@$(CONDA_ACTIVATE); gunicorn -w 4 --timeout 150 -b 0.0.0.0:8080 wsgi:gunicorn_app
 
 
 	

@@ -22,6 +22,7 @@ def get_data():
 
     df = gpd.GeoDataFrame(df, geometry=gpd.GeoSeries.from_wkt(df[config["data"]["geometry_colum"]]))
     df.crs = "EPSG:2154"
+    df = df.to_crs("EPSG:4326")
 
     return df
 

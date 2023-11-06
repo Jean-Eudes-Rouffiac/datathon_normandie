@@ -70,6 +70,15 @@ def seine_maritime():
         data_commune_preca = get_data_preca_table_data(data)
     )
 
+@cache.cached(timeout=50)
+def carte_rouen():
+    data = gdf_data[gdf_data['code_departement_insee']==76]
+    return render_template(
+        'carte_rouen.html',
+        data = data,
+        data_commune_preca = get_data_preca_table_data(data)
+    )
+
 def login():
     return render_template(
         'login.html',
