@@ -12,16 +12,6 @@ downloadPNG_logement_normandie.addEventListener('click', function() {
     a.click();
 });
 
-/* var downloadPNG_ges_normandie = document.getElementById('downloadPNG_preca_normandie');
-
-downloadPNG_ges_normandie.addEventListener('click', function() {
-    var url = chart_normandie_ges.toBase64Image('image/png');
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = 'bar-chart-preca-normandie.png';
-    a.click();
-}); */
-
 var downloadPNG_preca_normandie = document.getElementById('downloadPNG_preca_normandie');
 
 downloadPNG_preca_normandie.addEventListener('click', function() {
@@ -32,15 +22,25 @@ downloadPNG_preca_normandie.addEventListener('click', function() {
     a.click();
 });
 
-/* var downloadPNG_confiance_normandie = document.getElementById('downloadPNG_confiance_normandie');
+var downloadPNG_dpe_normandie = document.getElementById('downloadPNG_dpe_normandie');
 
-downloadPNG_confiance_normandie.addEventListener('click', function() {
-    var url = normandie_confiance_piechart.toBase64Image('image/png');
+downloadPNG_dpe_normandie.addEventListener('click', function() {
+    var url = chart_normandie_dpe.toBase64Image('image/png');
     var a = document.createElement('a');
     a.href = url;
-    a.download = 'pie-chart-confiance-normandie.png';
+    a.download = 'bar-chart-dpe-normandie.png';
     a.click();
-}); */
+});
+
+var downloadPNG_potentiel_normandie = document.getElementById('downloadPNG_potentiel_normandie');
+
+downloadPNG_potentiel_normandie.addEventListener('click', function() {
+    var url = chart_normandie_potentiel.toBase64Image('image/png');
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'chart-potententiel-normandie.png';
+    a.click();
+});
 
 
 function convertTableToCSV_normandie() {

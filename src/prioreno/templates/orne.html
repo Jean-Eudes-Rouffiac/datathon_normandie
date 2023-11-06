@@ -68,7 +68,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Potentiel énergétique détécté</div>
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ "{:,.0f}".format(data['score similitude'].count())|replace(',', ' ') }}</div>
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ "{:,.0f}".format(data[data['potentiel_energetique']==1]['nb_log'].sum())|replace(',', ' ') }}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-angle-double-up fa-2x text-gray-300"></i>
@@ -207,7 +207,7 @@
                                     <div class="chart-pie pt-4 pb-2">
                                         <canvas id="orne_confiance_piechart"></canvas>
                                         <script>
-                                            var data_orne_confiance = JSON.parse('{{ data[["confiance", "geometry"]].groupby("confiance").count().reset_index().rename(columns={"geometry":"nombre"}).sort_values(by="confiance").to_json(orient="records") | safe }}');
+                                            var data_orne_confiance = JSON.parse('{{ data[["confiance", "geometry", "nb_log"]].groupby("confiance").sum("nb_log").reset_index().rename(columns={"nb_log":"nombre"}).sort_values(by="confiance").to_json(orient="records") | safe }}');
                                             var labels_orne_confiance = data_orne_confiance.map(function(entry) { return entry.confiance; });
                                             var values_orne_confiance = data_orne_confiance.map(function(entry) { return entry.nombre; });
                                         </script>

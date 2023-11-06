@@ -24,28 +24,24 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 // LOGEMENT normandie
 var ctx_normandie_logement = document.getElementById("normandie_logement_barchart");
 var chart_normandie_logement = new Chart(ctx_normandie_logement, {
-  type: 'bar',
+  type: 'horizontalBar',
   data: {
     labels: labels_normandie_logement,
     datasets: [{
       label: "Nombre de logements",
       backgroundColor: [
-        'rgba(0, 100, 0, 0.6)',  // Vert foncé
-        'rgba(107, 142, 35, 0.6)',  // Vert clair
-        'rgba(154, 205, 50, 0.6)',  // Vert très clair 
-        'rgba(255, 255, 0, 0.6)',  // Jaune
-        'rgba(255, 165, 0, 0.6)',  // Orange
-        'rgba(255, 69, 0, 0.6)',  // Orange foncé
-        'rgba(255, 0, 0, 0.6)'  // Rouge
+        'rgba(208,233,238,1)',  // Nuances de bleu
+        'rgba(163,215,239,1)', 
+        'rgba(112,186,213,1)', 
+        'rgba(62,145,185,1)',
+        'rgba(30,123,166,1)', 
       ],
       borderColor: [
-        'rgba(0, 100, 0, 0.6)',  // Vert foncé
-        'rgba(107, 142, 35, 0.6)',  // Vert clair
-        'rgba(154, 205, 50, 0.6)',  // Vert très clair 
-        'rgba(255, 255, 0, 0.6)',  // Jaune
-        'rgba(255, 165, 0, 0.6)',  // Orange
-        'rgba(255, 69, 0, 0.6)',  // Orange foncé
-        'rgba(255, 0, 0, 0.6)'  // Rouge
+        'rgba(208,233,238,1)',  // Nuances de bleu
+        'rgba(163,215,239,1)', 
+        'rgba(112,186,213,1)', 
+        'rgba(62,145,185,1)',
+        'rgba(30,123,166,1)', 
       ],
       hoverBackgroundColor: "#271b33",
       data: values_normandie_logement,
@@ -63,9 +59,14 @@ var chart_normandie_logement = new Chart(ctx_normandie_logement, {
     },
     scales: {
       xAxes: [{
-        time: {
-          unit: 'month'
-        },
+        ticks: {
+            min: 0,
+            maxTicksLimit: 5,
+            padding: 10,
+            callback: function(value, index, values) {
+              return number_format(value, 2, '.', ' ');
+            }
+          },
         gridLines: {
           display: false,
           drawBorder: false
@@ -80,9 +81,6 @@ var chart_normandie_logement = new Chart(ctx_normandie_logement, {
           min: 0,
           maxTicksLimit: 5,
           padding: 10,
-          callback: function(value, index, values) {
-            return number_format(value, 2, '.', ' ');
-          }
         },
         gridLines: {
           color: "rgb(234, 236, 244)",
@@ -111,7 +109,7 @@ var chart_normandie_logement = new Chart(ctx_normandie_logement, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ": " + number_format(tooltipItem.yLabel, 2, '.', ' ');
+          return datasetLabel + ": " + number_format(tooltipItem.xLabel, 2, '.', ' ');
         }
       }
     },
@@ -231,24 +229,120 @@ var chart_normandie_preca = new Chart(ctx_normandie_preca, {
 });
 
 
-
-/* 
-// CONFIANCE normandie
-var ctx_confiance_normandie = document.getElementById("normandie_confiance_piechart");
-var normandie_confiance_piechart = new Chart(ctx_confiance_normandie, {
-  type: 'doughnut',
+// PRECA normandie
+var ctx_normandie_dpe = document.getElementById("normandie_dpe_barchart");
+var chart_normandie_dpe = new Chart(ctx_normandie_dpe, {
+  type: 'bar',
   data: {
-    labels: labels_normandie_confiance,
+    labels: labels_normandie_departement_dpe,
     datasets: [{
-      data: values_normandie_confiance,
-      backgroundColor: ['#1cc88a', '#36b9cc', '#858796'],
-      hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
-      hoverBorderColor: "rgba(234, 236, 244, 1)",
+      label: "A",
+      backgroundColor: 'rgba(0, 100, 0, 0.6)',
+      borderColor: 'rgba(0, 100, 0, 0.6)',
+      hoverBackgroundColor: "#271b33",
+      data: values_normandie_dpe_a,
+    },
+    {
+      label: "B",
+      backgroundColor: 'rgba(107, 142, 35, 0.6)',
+      borderColor: 'rgba(107, 142, 35, 0.6)',
+      hoverBackgroundColor: "#271b33",
+      data: values_normandie_dpe_b,
+    },
+    {
+      label: "C",
+      backgroundColor: 'rgba(154, 205, 50, 0.6)',
+      borderColor: 'rgba(154, 205, 50, 0.6)',
+      hoverBackgroundColor: "#271b33",
+      data: values_normandie_dpe_c,
+    },
+    {
+      label: "D",
+      backgroundColor: 'rgba(255, 255, 0, 0.6)',
+      borderColor: 'rgba(255, 255, 0, 0.6)',
+      hoverBackgroundColor: "#271b33",
+      data: values_normandie_dpe_d,
+    },
+    {
+      label: "E",
+      backgroundColor: 'rgba(255, 165, 0, 0.6)',
+      borderColor: 'rgba(255, 165, 0, 0.6)',
+      hoverBackgroundColor: "#271b33",
+      data: values_normandie_dpe_e,
+    },
+    {
+      label: "F",
+      backgroundColor: 'rgba(255, 69, 0, 0.6)',
+      borderColor: 'rgba(255, 69, 0, 0.6)',
+      hoverBackgroundColor: "#271b33",
+      data: values_normandie_dpe_f,
+    }
+    ,
+    {
+      label: "G",
+      backgroundColor: 'rgba(255, 0, 0, 0.6)',
+      borderColor: 'rgba(255, 0, 0, 0.6)',
+      hoverBackgroundColor: "#271b33",
+      data: values_normandie_dpe_g,
     }],
   },
   options: {
     maintainAspectRatio: false,
+    layout: {
+      padding: {
+        left: 10,
+        right: 25,
+        top: 25,
+        bottom: 0
+      }
+    },
+    scales: {
+      xAxes: [{
+        ticks: {
+            min: 0,
+            maxTicksLimit: 5,
+            padding: 10,
+            callbacks: {
+              label: function(tooltipItem, chart) {
+                var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                return datasetLabel + ": "  + tooltipItem.yLabel + "%"
+              }
+            },
+          },
+        gridLines: {
+          display: false,
+          drawBorder: false
+        },
+        ticks: {
+          maxTicksLimit: 6
+        },
+        maxBarThickness: 25,
+      }],
+      yAxes: [{
+        ticks: {
+          min: 0,
+          maxTicksLimit: 5,
+          padding: 10,
+          callback: function(value, index, values) {
+            return value + '%';
+          }
+        },
+        gridLines: {
+          color: "rgb(234, 236, 244)",
+          zeroLineColor: "rgb(234, 236, 244)",
+          drawBorder: false,
+          borderDash: [2],
+          zeroLineBorderDash: [2]
+        }
+      }],
+    },
+    legend: {
+      display: true
+    },
     tooltips: {
+      titleMarginBottom: 10,
+      titleFontColor: '#6e707e',
+      titleFontSize: 14,
       backgroundColor: "rgb(255,255,255)",
       bodyFontColor: "#858796",
       borderColor: '#dddfeb',
@@ -257,10 +351,107 @@ var normandie_confiance_piechart = new Chart(ctx_confiance_normandie, {
       yPadding: 15,
       displayColors: false,
       caretPadding: 10,
+      callbacks: {
+        label: function(tooltipItem, chart) {
+          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+          return datasetLabel + ": "  + tooltipItem.yLabel + "%"
+        }
+    },
+    },
+  }
+});
+
+
+
+// Potentiel normandie
+var ctx_normandie_potentiel = document.getElementById("normandie_potentiel_barchart");
+var chart_normandie_potentiel = new Chart(ctx_normandie_potentiel, {
+  type: 'bar',
+  data: {
+    labels: labels_normandie_potentiel,
+    datasets: [{
+      label: "Taux: ",
+      backgroundColor: [
+        'rgba(208,233,238,1)',  // Nuances de bleu
+        'rgba(163,215,239,1)', 
+        'rgba(112,186,213,1)', 
+        'rgba(62,145,185,1)',
+        'rgba(30,123,166,1)', 
+      ],
+      borderColor: [
+        'rgba(208,233,238,1)',  // Nuances de bleu
+        'rgba(163,215,239,1)', 
+        'rgba(112,186,213,1)', 
+        'rgba(62,145,185,1)',
+        'rgba(30,123,166,1)', 
+      ],
+      hoverBackgroundColor: "#271b33",
+      data: values_normandie_potentiel,
+    }],
+  },
+  options: {
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+        left: 10,
+        right: 25,
+        top: 25,
+        bottom: 0
+      }
+    },
+    scales: {
+      xAxes: [{
+        time: {
+          unit: 'month'
+        },
+        gridLines: {
+          display: false,
+          drawBorder: false
+        },
+        ticks: {
+          maxTicksLimit: 6
+        },
+        maxBarThickness: 25,
+      }],
+      yAxes: [{
+        ticks: {
+          min: 0,
+          maxTicksLimit: 5,
+          padding: 10,
+          callback: function(value, index, values) {
+            return value + '%';
+          }
+        },
+        gridLines: {
+          color: "rgb(234, 236, 244)",
+          zeroLineColor: "rgb(234, 236, 244)",
+          drawBorder: false,
+          borderDash: [2],
+          zeroLineBorderDash: [2]
+        }
+      }],
     },
     legend: {
       display: false
     },
-    cutoutPercentage: 80,
-  },
-}); */
+    tooltips: {
+      titleMarginBottom: 10,
+      titleFontColor: '#6e707e',
+      titleFontSize: 14,
+      backgroundColor: "rgb(255,255,255)",
+      bodyFontColor: "#858796",
+      borderColor: '#dddfeb',
+      borderWidth: 1,
+      xPadding: 15,
+      yPadding: 15,
+      displayColors: false,
+      caretPadding: 10,
+      callbacks: {
+        label: function(tooltipItem, chart) {
+          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+          return datasetLabel + ": "  + tooltipItem.yLabel + "%"
+        }
+    },
+    },
+  }
+});

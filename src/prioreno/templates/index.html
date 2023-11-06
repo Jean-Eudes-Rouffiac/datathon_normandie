@@ -46,7 +46,7 @@
                                                 <div class="col">
                                                     <div class="progress progress-sm mr-2">
                                                         <div class="progress-bar bg-danger" role="progressbar"
-                                                            style="width: 18%" aria-valuenow="18" aria-valuemin="0"
+                                                            style="width: 21%" aria-valuenow="21" aria-valuemin="0"
                                                             aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
@@ -68,7 +68,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Potentiel énergétique détécté</div>
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ "{:,.0f}".format(data['score similitude'].count())|replace(',', ' ') }}</div>
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ "{:,.0f}".format(data[data['potentiel_energetique']==1]['nb_log'].sum())|replace(',', ' ') }}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-angle-double-up fa-2x text-gray-300"></i>
@@ -123,7 +123,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-dark">Répartition du score de précarité énergétique en fonction du département</h6>
+                                    <h6 class="m-0 font-weight-bold text-dark">Répartition du score de précarité (5: le plus haut) énergétique par département</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -159,6 +159,90 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- DPE CHART -->
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-dark">Répartition (%) des DPE par département</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Exportation:</div>
+                                            <a class="dropdown-item" id="downloadPNG_dpe_normandie" href="#">PNG</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-bar">
+                                        <canvas id="normandie_dpe_barchart"></canvas>
+                                        <script>
+                                            var data_normandie_dpe = JSON.parse('{{ data_dpe.to_json(orient="records") | safe }}');
+                                            var data_normandie_dpe_a = JSON.parse('{{ data_dpe[data_dpe["dpe"]=="A"].to_json(orient="records") | safe }}');
+                                            var data_normandie_dpe_b = JSON.parse('{{ data_dpe[data_dpe["dpe"]=="B"].to_json(orient="records") | safe }}');
+                                            var data_normandie_dpe_c = JSON.parse('{{ data_dpe[data_dpe["dpe"]=="C"].to_json(orient="records") | safe }}');
+                                            var data_normandie_dpe_d = JSON.parse('{{ data_dpe[data_dpe["dpe"]=="D"].to_json(orient="records") | safe }}');
+                                            var data_normandie_dpe_e = JSON.parse('{{ data_dpe[data_dpe["dpe"]=="E"].to_json(orient="records") | safe }}');
+                                            var data_normandie_dpe_f = JSON.parse('{{ data_dpe[data_dpe["dpe"]=="F"].to_json(orient="records") | safe }}');
+                                            var data_normandie_dpe_g = JSON.parse('{{ data_dpe[data_dpe["dpe"]=="G"].to_json(orient="records") | safe }}');
+
+                                            var labels_normandie_dpe = data_normandie_dpe_a.map(function(entry) { return entry.dpe; });
+                                            var labels_normandie_departement_dpe = data_normandie_dpe_a.map(function(entry) { return entry.libelle_departement; });
+
+                                            var values_normandie_dpe_a = data_normandie_dpe_a.map(function(entry) { return entry.taux_dpe; });
+                                            var values_normandie_dpe_b = data_normandie_dpe_b.map(function(entry) { return entry.taux_dpe; });
+                                            var values_normandie_dpe_c = data_normandie_dpe_c.map(function(entry) { return entry.taux_dpe; });
+                                            var values_normandie_dpe_d = data_normandie_dpe_d.map(function(entry) { return entry.taux_dpe; });
+                                            var values_normandie_dpe_e = data_normandie_dpe_e.map(function(entry) { return entry.taux_dpe; });
+                                            var values_normandie_dpe_f = data_normandie_dpe_f.map(function(entry) { return entry.taux_dpe; });
+                                            var values_normandie_dpe_g = data_normandie_dpe_g.map(function(entry) { return entry.taux_dpe; });
+
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- POTENTIEL CHART -->
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-dark">Taux de logements à potentiel énergétique (pour score de précarité à 5)</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Exportation:</div>
+                                            <a class="dropdown-item" id="downloadPNG_potentiel_normandie" href="#">PNG</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-bar">
+                                        <canvas id="normandie_potentiel_barchart"></canvas>
+                                        <script>
+                                            var data_nomrandie_potentiel = JSON.parse('{{ data_potentiel.to_json(orient="records") | safe }}');
+                                            var labels_normandie_potentiel = data_nomrandie_potentiel.map(function(entry) { return entry.libelle_departement; });
+                                            var values_normandie_potentiel = data_nomrandie_potentiel.map(function(entry) { return entry.taux_potentiel; });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <!-- TOP 20 villes préca -->
                         <div class="col-xl-12 col-lg-12">

@@ -21,6 +21,14 @@
     <link href="static/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="static/css/perso.css" rel="stylesheet">
 
+    <link href="static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+
+
+
 </head>
 
 <body id="page-top">
@@ -74,15 +82,15 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="{{ url_for('prioreno.table') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Table</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-map-o"></i>
+                <a class="nav-link" href="{{ url_for('prioreno.table') }}">
+                    <i class="fas fa-fw fa-map-marker"></i>
                     <span>Carte</span></a>
             </li>
 
@@ -123,9 +131,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" 
                                aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Jean-Eudes</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Normandie</span>
                                 <img class="img-profile rounded-circle"
-                                    src="static/img/undraw_profile.svg">
+                                    src="static/img/logo_region_normandie.png">
                             </a>
                         </li>
                     </ul>
@@ -164,6 +172,8 @@
         <!-- Bootstrap core JavaScript-->
         <script src="static/vendor/jquery/jquery.min.js"></script>
         <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+
 
         <!-- Core plugin JavaScript-->
         <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -174,6 +184,19 @@
         <!-- Page level plugins -->
         <script src="static/vendor/chart.js/Chart.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+
+        <!-- Page level plugins -->
+        <script src="static/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+
+
+        <!-- Page level custom scripts -->
+        <script src="static/js/datatables.js"></script>
 
         <!-- Page level custom scripts -->
         <script src="static/js/charts_normandie.js"></script>
