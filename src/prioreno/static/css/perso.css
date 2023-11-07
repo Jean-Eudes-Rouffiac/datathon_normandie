@@ -2,3 +2,7 @@
 .table-small-text td {
     font-size: 13px;
 }
+
+#frameId {
+    width: 100%;
+}

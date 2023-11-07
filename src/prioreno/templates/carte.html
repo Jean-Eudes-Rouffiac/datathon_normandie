@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% block content %}
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h2 mb-0 text-dark">Carte</h1>
+                    </div>
+
+                    <form name="filterFormIdCarte" method="POST" id="filterFormIdCarte">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="dpeFilter">DPE :   </label>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="cartedpeCheckboxA" value="A">
+                                        <label class="form-check-label" for="cartedpeCheckboxA">A</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="cartedpeCheckboxB" value="B">
+                                        <label class="form-check-label" for="cartedpeCheckboxB">B</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="cartedpeCheckboxC" value="C">
+                                        <label class="form-check-label" for="cartedpeCheckboxC">C</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="cartedpeCheckboxD" value="D">
+                                        <label class="form-check-label" for="cartedpeCheckboxD">D</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="cartedpeCheckboxE" value="E">
+                                        <label class="form-check-label" for="cartedpeCheckboxE">E</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="cartedpeCheckboxF" value="F">
+                                        <label class="form-check-label" for="cartedpeCheckboxF">F</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="cartedpeCheckboxG" value="G">
+                                        <label class="form-check-label" for="cartedpeCheckboxG">G</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="gesFilter">GES :   </label>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="cartegesCheckboxA" value="A">
+                                        <label class="form-check-label" for="cartegesCheckboxA">A</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="cartegesCheckboxB" value="B">
+                                        <label class="form-check-label" for="cartegesCheckboxB">B</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="cartegesCheckboxC" value="C">
+                                        <label class="form-check-label" for="cartegesCheckboxC">C</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="cartegesCheckboxD" value="D">
+                                        <label class="form-check-label" for="cartegesCheckboxD">D</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="cartegesCheckboxE" value="E">
+                                        <label class="form-check-label" for="cartegesCheckboxE">E</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="cartegesCheckboxF" value="F">
+                                        <label class="form-check-label" for="cartegesCheckboxF">F</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="cartegesCheckboxG" value="G">
+                                        <label class="form-check-label" for="cartegesCheckboxG">G</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="precaFilter">Score précarité :   </label>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="carteprecaCheckbox1" value=1>
+                                        <label class="form-check-label" for="carteprecaCheckbox1">1</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="carteprecaCheckbox2" value=2>
+                                        <label class="form-check-label" for="carteprecaCheckbox2">2</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="carteprecaCheckbox3" value=3>
+                                        <label class="form-check-label" for="carteprecaCheckbox3">3</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="carteprecaCheckbox4" value=4>
+                                        <label class="form-check-label" for="carteprecaCheckbox4">4</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="carteprecaCheckbox5" value=5>
+                                        <label class="form-check-label" for="carteprecaCheckbox5">5</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="confianceFilter">Confiance :   </label>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="carteconfianceCheckbox1" value=1>
+                                        <label class="form-check-label" for="carteconfianceCheckbox1">1</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="carteconfianceCheckbox2" value=2>
+                                        <label class="form-check-label" for="confianceCheckbox2">2</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="carteconfianceCheckbox3" value=3>
+                                        <label class="form-check-label" for="carteconfianceCheckbox3">3</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="potentielFilter">Potentiel énergétique :   </label>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="cartepotentielCheckboxOui" value="oui">
+                                        <label class="form-check-label" for="cartepotentielCheckboxOui">Oui</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group d-flex">
+                                    <input type="text" id="codeINSEEFilterCarte" class="form-control" placeholder="Entrez le code INSEE">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2 d-flex align-items-center justify-content-between">
+                                <button type="submit" id="filterButtonCarte" class="btn btn-primary">Filtrer</button>
+                                <button type="button" id="resetButtonCarte" class="btn btn-secondary">Réinitialiser</button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <!-- Page Heading -->
+                    <p class="mb-4"></p>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="col" id="frameId">
+                                {{ iframe | safe }}
+                            </div>    
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+ {% endblock %}

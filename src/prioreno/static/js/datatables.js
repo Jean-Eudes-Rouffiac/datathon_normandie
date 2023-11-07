@@ -78,7 +78,6 @@ $('#filterButtonTable').click(function(event) {
             code_commune_insee: codeINSEEValue,
           },
           success: function(data) {
-            console.log(data)
             $('#dataTable').DataTable({
               data: data,
               columns: [

@@ -8,7 +8,10 @@ import folium
 from flask import render_template, request, redirect, url_for, jsonify, abort
 from prioreno.conf.conf_file import config
 from prioreno.controllers.cache_settings import cache
-from prioreno.data_processing.get_data import get_data, get_data_preca_table_data, get_libelle_departement, get_taux_preca_par_departement, get_taux_dpe_par_departement, get_potentiel_energetique, get_taux_potentiel_par_departement, generate_filter_table
+from prioreno.controllers.map_designer import generate_default_map, generate_filtered_map
+from prioreno.data_processing.get_data import get_data, get_data_preca_table_data, get_libelle_departement, get_taux_preca_par_departement
+from prioreno.data_processing.get_data import get_taux_dpe_par_departement, get_potentiel_energetique, get_taux_potentiel_par_departement
+from prioreno.data_processing.get_data import generate_filter_data, rename_column_for_datatable
 
 pd.set_option('display.max_column', None)
 
@@ -91,16 +94,53 @@ def get_filtered_data():
             'code_commune_insee': request.form.get('code_commune_insee', None),
         }
 
-        filtered_data = generate_filter_table(gdf_data, filters)
+        filtered_data = generate_filter_data(gdf_data, filters)
+        filtered_data = rename_column_for_datatable(filtered_data)
 
         return jsonify(filtered_data.to_dict(orient='records'))
 
     return render_template('tables.html')
 
-@cache.cached(timeout=50)
+
 def table():
     return render_template(
         'tables.html',
+    )
+
+
+def get_filtered_carte():
+    if request.method == 'POST':
+
+        filters = {
+            'dpe': request.form.getlist('dpe[]', None),
+            'ges': request.form.getlist('ges[]', None),
+            'score_preca': request.form.getlist('score_preca[]', None),
+            'confiance': request.form.getlist('confiance[]', None),
+            'potentiel': request.form.get('potentiel', None),
+            'code_commune_insee': request.form.get('code_commune_insee', None),
+        }
+
+        filtered_data = generate_filter_data(gdf_data, filters)
+
+        m = generate_filtered_map(filtered_data)
+        f = folium.Figure(height=700)
+        m = m.add_to(f)
+
+        iframe = m._repr_html_()
+
+        return jsonify({'iframe': iframe})
+
+
+def carte():
+    m = generate_default_map()
+    f = folium.Figure(height=700)
+    m.add_to(f)
+
+    iframe = m._repr_html_()
+
+    return render_template(
+        'carte.html',
+        iframe=iframe,
     )
 
 

@@ -8,9 +8,10 @@ from prioreno.conf.conf_file import config
 from prioreno.controllers.cache_settings import cache
 
 pd.set_option('display.max_column', None)
+pd.options.mode.chained_assignment = None
 
 
-def get_data():
+def get_data() -> gpd.GeoDataFrame:
 
     url = config["data"]["url"] + '1' + '.csv'
     df = pd.read_csv(url)
@@ -27,7 +28,7 @@ def get_data():
     return df
 
 
-def get_data_preca_table_data(df: pd.DataFrame) -> pd.DataFrame:
+def get_data_preca_table_data(df: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
 
     commune_nb_log = df[['libelle_commune_insee', 'nb_log']].groupby('libelle_commune_insee').sum('nb_log')
     commune_nb_preca = df[df['precarite_energetique']==5][['libelle_commune_insee', 'nb_log']].groupby(['libelle_commune_insee']).agg({'nb_log': 'sum'}).reset_index().rename(columns={'nb_log':'precarite_energetique'})
@@ -42,7 +43,7 @@ def get_data_preca_table_data(df: pd.DataFrame) -> pd.DataFrame:
 
     return data_preca
 
-def get_libelle_departement(df: pd.DataFrame) -> pd.DataFrame:
+def get_libelle_departement(df: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
     departement_mapping = {
     14: 'Calvados',
     27: 'Eure',
@@ -53,11 +54,11 @@ def get_libelle_departement(df: pd.DataFrame) -> pd.DataFrame:
     df['libelle_departement'] = df['code_departement_insee'].map(departement_mapping)
     return df
 
-def get_potentiel_energetique(df: pd.DataFrame) -> pd.DataFrame:
+def get_potentiel_energetique(df: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
     df['potentiel_energetique'] = df['score similitude'].notnull().astype(int)
     return df
 
-def get_taux_preca_par_departement(df: pd.DataFrame) -> pd.DataFrame:
+def get_taux_preca_par_departement(df: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
     total_logement_departement = df[["libelle_departement", "nb_log"]].groupby(["libelle_departement"]).sum("nb_log").reset_index()
     total_preca_departement = df[["libelle_departement", "precarite_energetique", "nb_log"]].groupby(["libelle_departement", "precarite_energetique"]).sum("nb_log").reset_index().rename(columns = {'nb_log' : 'nb_log_preca'})
 
@@ -68,7 +69,7 @@ def get_taux_preca_par_departement(df: pd.DataFrame) -> pd.DataFrame:
 
     return departement_preca
 
-def get_taux_dpe_par_departement(df: pd.DataFrame) -> pd.DataFrame:
+def get_taux_dpe_par_departement(df: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
     total_logement_departement = df[["libelle_departement", "nb_log"]].groupby(["libelle_departement"]).sum("nb_log").reset_index()
     total_dpe_departement = df[["libelle_departement", "dpe", "nb_log"]].groupby(["libelle_departement", "dpe"]).sum("nb_log").reset_index().rename(columns = {'nb_log' : 'nb_log_dpe'})
 
@@ -80,7 +81,7 @@ def get_taux_dpe_par_departement(df: pd.DataFrame) -> pd.DataFrame:
     return departement_dpe
     
 
-def get_taux_potentiel_par_departement(df: pd.DataFrame) -> pd.DataFrame:
+def get_taux_potentiel_par_departement(df: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
 
     df_final_merge_preca = df[df['precarite_energetique'].isin([4,5])]
 
@@ -94,9 +95,7 @@ def get_taux_potentiel_par_departement(df: pd.DataFrame) -> pd.DataFrame:
 
     return departement_potentiel
 
-def generate_filter_table(df: pd.DataFrame, filters) -> pd.DataFrame:
-
-    df = pd.DataFrame(df)
+def generate_filter_data(df: gpd.GeoDataFrame, filters) -> gpd.GeoDataFrame:
 
     df = df[df['code_commune_insee'] == int(filters["code_commune_insee"])]
 
@@ -116,7 +115,12 @@ def generate_filter_table(df: pd.DataFrame, filters) -> pd.DataFrame:
     df["libelle_commune_insee_associe"] = df["libelle_commune_insee_associe"].fillna("")
     df["adresse_associe"] = df["adresse_associe"].fillna("")
     df["batiment_dpe_associe"] = df["batiment_dpe_associe"].fillna("")
-         
+
+    return df
+
+
+def rename_column_for_datatable(df: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
+
     df = df[["libelle_departement", 
              "libelle_commune_insee", 
              "adresse", 
