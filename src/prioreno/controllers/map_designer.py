@@ -12,8 +12,11 @@ def generate_default_map() :
     m = folium.Map(location=[NORMANDIE_LATITUDE, NORMANDIE_LONGITUDE], zoom_start=8, control_scale=True,
                    tiles="cartodbpositron")
 
-    tile_osm = TileLayer("stamenterrain")
-    tile_osm.add_to(m)
+    folium.TileLayer(
+        tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', attr=(
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> '
+            'contributors, &copy; <a href="https://opentopomap.org/attributions">OpenTopoMap</a>'
+        ), name="Forêts & Reliefs").add_to(m)
 
     return m
 
@@ -26,8 +29,11 @@ def generate_filtered_map(df: gpd.GeoDataFrame):
     m = folium.Map(location=[latitude_moyenne, longitude_moyenne], zoom_start=12, control_scale=True,
                    tiles="cartodbpositron")
 
-    tile_osm = TileLayer("stamenterrain")
-    tile_osm.add_to(m)
+    folium.TileLayer(
+        tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', attr=(
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> '
+            'contributors, &copy; <a href="https://opentopomap.org/attributions">OpenTopoMap</a>'
+        ), name="Forêts & Reliefs").add_to(m)
 
     for _, r in df.iterrows():
         longitude, latitude = r.geometry.x, r.geometry.y
