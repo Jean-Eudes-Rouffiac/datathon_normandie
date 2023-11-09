@@ -6,20 +6,32 @@ import geopandas as gpd
 
 from prioreno.conf.conf_file import config
 from prioreno.controllers.cache_settings import cache
+from prioreno.data_processing import CSV_FILE
 
 pd.set_option('display.max_column', None)
 pd.options.mode.chained_assignment = None
 
 
-def get_data() -> gpd.GeoDataFrame:
+""" def get_data() -> gpd.GeoDataFrame:
 
     url = config["data"]["url"] + '1' + '.csv'
     df = pd.read_csv(url)
 
     for i in range(2, 11):
+        print("téléchargement")
         url = config["data"]["url"] + str(i) + '.csv'
         df_i = pd.read_csv(url, low_memory=False)
         df = pd.concat([df, df_i])
+
+    df = gpd.GeoDataFrame(df, geometry=gpd.GeoSeries.from_wkt(df[config["data"]["geometry_colum"]]))
+    df.crs = "EPSG:2154"
+    df = df.to_crs('EPSG:4326')
+
+    return df """
+
+def get_data() -> gpd.GeoDataFrame:
+
+    df = pd.read_csv(CSV_FILE)
 
     df = gpd.GeoDataFrame(df, geometry=gpd.GeoSeries.from_wkt(df[config["data"]["geometry_colum"]]))
     df.crs = "EPSG:2154"
@@ -38,8 +50,8 @@ def get_data_preca_table_data(df: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
     data_preca = data_preca.merge(commune_nb_potentiel, on = 'libelle_commune_insee', how = 'left')
 
     data_preca['nb_log'] = data_preca['nb_log'].astype(int)
-    data_preca['precarite_energetique'] = data_preca['precarite_energetique'].astype(int)
-    data_preca['potentiel_energetique'] = data_preca['potentiel_energetique'].astype(int)
+    #data_preca['precarite_energetique'] = data_preca['precarite_energetique'].astype(int)
+    #data_preca['potentiel_energetique'] = data_preca['potentiel_energetique'].astype(int)
 
     return data_preca
 

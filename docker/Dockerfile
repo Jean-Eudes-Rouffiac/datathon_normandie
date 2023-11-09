@@ -1,5 +1,5 @@
 # Utilisez une image de base Python
-FROM python:3.9-slim
+FROM --platform=linux/amd64 python:3.9-slim
 
 
 RUN apt-get update && apt-get install -y gdal-bin libgdal-dev g++
